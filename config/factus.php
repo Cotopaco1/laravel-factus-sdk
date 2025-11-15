@@ -6,9 +6,9 @@ return [
     'sandbox_base_url' => env('FACTUS_SANDBOX_BASE_URL', 'https://api-sandbox.factus.com.co'),
     'client' => [
         'id' => env('FACTUS_CLIENT_ID'),
-        'secret' => env('FACTUS_CLIENT_SECRET')
+        'secret' => env('FACTUS_CLIENT_SECRET'),
     ],
     'username' => env('FACTUS_USERNAME'),
     'password' => env('FACTUS_PASSWORD'),
-    'production' => env('FACTUS_PRODUCTION', false)
+    'production' => env('FACTUS_PRODUCTION', false),
 ];

@@ -38,6 +38,6 @@ class InvoiceItem
             'tribute_id' => $this->tributeId,
             'withholding_taxes' => $this->withholdingTaxes,
             'mandate' => $this->mandate,
-        ], fn($value) => $value !== null);
+        ], fn ($value) => $value !== null);
     }
 }

@@ -41,8 +41,8 @@ class Invoice
             'billing_period' => $this->billingPeriod,
             'establishment' => $this->establishment,
             'customer' => $this->customer->toArray(),
-            'items' => array_map(fn(InvoiceItem $item) => $item->toArray(), $this->items),
+            'items' => array_map(fn (InvoiceItem $item) => $item->toArray(), $this->items),
             'allowance_charges' => $this->allowanceCharges,
-        ], fn($value) => $value !== null);
+        ], fn ($value) => $value !== null);
     }
 }

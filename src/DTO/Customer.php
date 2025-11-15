@@ -34,6 +34,6 @@ class Customer
             'legal_organization_id' => $this->legalOrganizationId,
             'tribute_id' => $this->tributeId,
             'municipality_id' => $this->municipalityId,
-        ], fn($value) => $value !== null);
+        ], fn ($value) => $value !== null);
     }
 }

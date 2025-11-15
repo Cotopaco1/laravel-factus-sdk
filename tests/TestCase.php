@@ -2,9 +2,9 @@
 
 namespace Cotopaco\Factus\Tests;
 
+use Cotopaco\Factus\FactusServiceProvider;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Orchestra\Testbench\TestCase as Orchestra;
-use Cotopaco\Factus\FactusServiceProvider;
 
 class TestCase extends Orchestra
 {

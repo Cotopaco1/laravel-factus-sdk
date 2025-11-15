@@ -1,17 +1,17 @@
 <?php
 
-use Cotopaco\Factus\Http\FactusHttpClient;
+use Cotopaco\Factus\DTO\Customer;
 use Cotopaco\Factus\DTO\Invoice;
 use Cotopaco\Factus\DTO\InvoiceItem;
-use Cotopaco\Factus\DTO\Customer;
 use Cotopaco\Factus\DTO\InvoiceResponse;
+use Cotopaco\Factus\Http\FactusHttpClient;
 use Illuminate\Support\Facades\Config;
 
 beforeEach(function () {
-    logger("Probando este log ");
+    logger('Probando este log ');
     // Carga las variables del .env.testing
-    if (file_exists(__DIR__ . '/../../.env.testing')) {
-        $dotenv = \Dotenv\Dotenv::createImmutable(__DIR__ . '/../..', '.env.testing');
+    if (file_exists(__DIR__.'/../../.env.testing')) {
+        $dotenv = \Dotenv\Dotenv::createImmutable(__DIR__.'/../..', '.env.testing');
         $dotenv->load();
     }
 
@@ -26,21 +26,21 @@ beforeEach(function () {
 });
 
 it('puede obtener access token de la API real', function () {
-    $client = new FactusHttpClient();
+    $client = new FactusHttpClient;
 
     $token = $client->getAccessToken();
 
     expect($token)->toBeString()->not->toBeEmpty();
 
-    dump('Access Token obtenido: ' . substr($token, 0, 20) . '...');
+    dump('Access Token obtenido: '.substr($token, 0, 20).'...');
 })->group('integration');
 
 it('puede crear y validar una factura en la API real', function () {
-    $client = new FactusHttpClient();
+    $client = new FactusHttpClient;
 
     $customer = new Customer(
         identificationDocumentId: 3,
-        identification: "123456789",
+        identification: '123456789',
         legalOrganizationId: 1,
         tributeId: 18, // 18 aplica iva, 21 no aplica.
         dv: 0,
@@ -69,7 +69,7 @@ it('puede crear y validar una factura en la API real', function () {
     $invoice = new Invoice(
         items: [$item],
         customer: $customer,
-        referenceCode: 'TEST-' . time(),
+        referenceCode: 'TEST-'.time(),
         sendEmail: false
     );
 
@@ -83,8 +83,8 @@ it('maneja errores de autenticación correctamente', function () {
     Config::set('factus.username', 'invalid-user');
     Config::set('factus.password', 'invalid-password');
 
-    $client = new FactusHttpClient();
+    $client = new FactusHttpClient;
 
     // Esto debe lanzar un abort(500)
-    expect(fn() => $client->getAccessToken())->toThrow(Exception::class);
+    expect(fn () => $client->getAccessToken())->toThrow(Exception::class);
 })->group('integration');

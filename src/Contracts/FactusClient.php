@@ -17,24 +17,24 @@ interface FactusClient
      * Ver una factura por número
      * GET /v1/bills/show/:number
      */
-    //public function getInvoice(string $number): InvoiceResponse;
+    // public function getInvoice(string $number): InvoiceResponse;
 
     /**
      * Ver y filtrar facturas
      * GET /v1/bills?filter[...]
      */
-    //public function listInvoices(
+    // public function listInvoices(
     //    ?InvoiceFilters $filters = null,
     //    int $page = 1,
     //    int $perPage = 20,
-    //): InvoiceCollectionResponse;
+    // ): InvoiceCollectionResponse;
 
     /**
      * Descargar PDF de la factura
      * GET /v1/bills/download-pdf/:number
      * (la response viene con el PDF en base64 y el nombre del archivo)
      */
-    //public function downloadInvoicePdf(string $number): InvoicePdfResponse;
+    // public function downloadInvoicePdf(string $number): InvoicePdfResponse;
 
     /**
      * Eliminar factura no validada por reference_code
@@ -42,5 +42,5 @@ interface FactusClient
      * (según la doc: elimina usando el código de referencia,
      * sólo si no está validada por la DIAN) :contentReference[oaicite:0]{index=0}
      */
-    //public function deleteNotValidatedInvoice(string $referenceCode): void;
+    // public function deleteNotValidatedInvoice(string $referenceCode): void;
 }

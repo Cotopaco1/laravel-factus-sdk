@@ -5,20 +5,32 @@ namespace Cotopaco\Factus\DTO;
 class InvoiceResponse
 {
     public string $status;
-    public string $message;
-    public ?array $company;
-    public ?array $establishment;
-    public ?array $customer;
-    public ?array $numberingRange;
-    public ?array $billingPeriod;
-    public ?array $bill;
-    public ?array $relatedDocuments;
-    public ?array $items;
-    public ?array $allowanceCharges;
-    public ?array $withholdingTaxes;
-    public ?array $creditNotes;
-    public ?array $debitNotes;
 
+    public string $message;
+
+    public ?array $company;
+
+    public ?array $establishment;
+
+    public ?array $customer;
+
+    public ?array $numberingRange;
+
+    public ?array $billingPeriod;
+
+    public ?array $bill;
+
+    public ?array $relatedDocuments;
+
+    public ?array $items;
+
+    public ?array $allowanceCharges;
+
+    public ?array $withholdingTaxes;
+
+    public ?array $creditNotes;
+
+    public ?array $debitNotes;
 
     public array $rawData;
 
@@ -76,7 +88,7 @@ class InvoiceResponse
 
     public function hasErrors(): bool
     {
-        return !empty($this->bill['errors'] ?? []);
+        return ! empty($this->bill['errors'] ?? []);
     }
 
     public function getErrors(): array
