@@ -2,24 +2,24 @@
 
 namespace Cotopaco\Factus;
 
-use Spatie\LaravelPackageTools\Package;
-use Spatie\LaravelPackageTools\PackageServiceProvider;
-use Cotopaco\Factus\Commands\FactusCommand;
+use Illuminate\Support\ServiceProvider;
 
-class FactusServiceProvider extends PackageServiceProvider
+class FactusServiceProvider extends ServiceProvider
 {
-    public function configurePackage(Package $package): void
+
+    public function register() : void
     {
-        /*
-         * This class is a Package Service Provider
-         *
-         * More info: https://github.com/spatie/laravel-package-tools
-         */
-        $package
-            ->name('laravel-factus-sdk')
-            ->hasConfigFile()
-            ->hasViews()
-            ->hasMigration('create_laravel_factus_sdk_table')
-            ->hasCommand(FactusCommand::class);
+        $this->mergeConfigFrom(
+            __DIR__ . '/../config/factus.php',
+            'factus'
+        );
     }
+
+    public function boot(): void
+    {
+        $this->publishes([
+            __DIR__.'/../config/factus.php' => config_path('factus.php'),
+        ], 'factus-config');
+    }
+    
 }
