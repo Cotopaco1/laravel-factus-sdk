@@ -3,7 +3,6 @@
 namespace Cotopaco\Factus\Http;
 
 use Cotopaco\Factus\Constants\CacheConstants;
-use Cotopaco\Factus\Contracts\FactusClient;
 use Illuminate\Http\Client\ConnectionException;
 use Illuminate\Http\Client\PendingRequest;
 use Illuminate\Http\Client\RequestException;
