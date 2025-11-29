@@ -1,44 +1,31 @@
 <?php
 
-namespace Cotopaco\Factus\DTO;
+namespace Cotopaco\Factus\Http\Clients\Invoice\Responses;
 
-class InvoiceResponse
+use Cotopaco\Factus\Http\HttpResponse;
+use Illuminate\Http\Client\Response;
+
+class InvoiceResponse extends HttpResponse
 {
-    public string $status;
-
-    public string $message;
-
     public ?array $company;
-
     public ?array $establishment;
-
     public ?array $customer;
-
     public ?array $numberingRange;
-
     public ?array $billingPeriod;
-
     public ?array $bill;
-
     public ?array $relatedDocuments;
-
     public ?array $items;
-
     public ?array $allowanceCharges;
-
     public ?array $withholdingTaxes;
-
     public ?array $creditNotes;
-
     public ?array $debitNotes;
 
-    public array $rawData;
 
-    public function __construct(array $data)
+    public function __construct(Response $response)
     {
-        $this->rawData = $data;
-        $this->status = $data['status'] ?? '';
-        $this->message = $data['message'] ?? '';
+        parent::__construct($response);
+
+        $data = $response->json();
 
         $responseData = $data['data'] ?? [];
         $this->company = $responseData['company'] ?? null;
@@ -88,7 +75,7 @@ class InvoiceResponse
 
     public function hasErrors(): bool
     {
-        return ! empty($this->bill['errors'] ?? []);
+        return !empty($this->bill['errors'] ?? []);
     }
 
     public function getErrors(): array
