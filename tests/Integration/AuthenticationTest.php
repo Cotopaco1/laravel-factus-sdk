@@ -2,10 +2,10 @@
 
 use Cotopaco\Factus\Http\FactusHttpClient;
 
-describe("Authentication", function(){
+describe('Authentication', function () {
 
     it('Get Access Token and Cache it correctly', function () {
-        $client = new FactusHttpClient();
+        $client = new FactusHttpClient;
 
         $token = $client->getAccessToken();
 
@@ -17,6 +17,5 @@ describe("Authentication", function(){
         expect($token2)->toBe($token);
 
     });
-
 
 })->group('api', 'authentication');

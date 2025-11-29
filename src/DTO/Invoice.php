@@ -6,25 +6,23 @@ class Invoice
 {
     public function __construct(
         /** @var array<InvoiceItem> */
-        public array    $items,
+        public array $items,
         public Customer $customer,
-        public string   $referenceCode,
-        public int      $paymentForm = 1,
-        public int      $paymentMethodCode = 10,
-        public string   $operationType = '10',
-        public bool     $sendEmail = true,
-        public ?int     $numberingRangeId = null,
-        public ?string  $document = null,
-        public ?string  $observation = null,
-        public ?string  $paymentDueDate = null,
-        public ?array   $orderReference = null,
-        public ?array   $relatedDocuments = null,
-        public ?array   $billingPeriod = null,
-        public ?array   $establishment = null,
-        public ?array   $allowanceCharges = null,
-    )
-    {
-    }
+        public string $referenceCode,
+        public int $paymentForm = 1,
+        public int $paymentMethodCode = 10,
+        public string $operationType = '10',
+        public bool $sendEmail = true,
+        public ?int $numberingRangeId = null,
+        public ?string $document = null,
+        public ?string $observation = null,
+        public ?string $paymentDueDate = null,
+        public ?array $orderReference = null,
+        public ?array $relatedDocuments = null,
+        public ?array $billingPeriod = null,
+        public ?array $establishment = null,
+        public ?array $allowanceCharges = null,
+    ) {}
 
     public function toArray(): array
     {
@@ -50,8 +48,6 @@ class Invoice
 
     /**
      * Create DTO from array
-     * @param array $data
-     * @return self
      */
     public static function fromArray(array $data): self
     {

@@ -33,7 +33,7 @@ class InvoiceDeleteResponse extends HttpResponse
      */
     public function isDeleted(): bool
     {
-        return $this->isSuccessful() && 
+        return $this->isSuccessful() &&
                str_contains(strtolower($this->message), 'eliminado');
     }
 }

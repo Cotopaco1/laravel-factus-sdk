@@ -8,6 +8,7 @@ use Illuminate\Http\Client\Response;
 class InvoicePdfResponse extends HttpResponse
 {
     public string $fileName;
+
     public string $pdfBase64Encoded;
 
     public function __construct(Response $response)
@@ -15,7 +16,7 @@ class InvoicePdfResponse extends HttpResponse
         parent::__construct($response);
 
         $responseData = $this->rawData['data'] ?? [];
-        
+
         $this->fileName = $responseData['file_name'] ?? '';
         $this->pdfBase64Encoded = $responseData['pdf_base_64_encoded'] ?? '';
     }
@@ -46,12 +47,14 @@ class InvoicePdfResponse extends HttpResponse
 
     /**
      * Guarda el PDF en el sistema de archivos
-     * @param string $path - Ruta donde guardar el archivo
+     *
+     * @param  string  $path  - Ruta donde guardar el archivo
      * @return bool - true si se guardó exitosamente
      */
     public function savePdfToFile(string $path): bool
     {
         $binaryContent = $this->getPdfBinary();
+
         return file_put_contents($path, $binaryContent) !== false;
     }
 
@@ -64,9 +67,9 @@ class InvoicePdfResponse extends HttpResponse
             'content' => $this->getPdfBinary(),
             'headers' => [
                 'Content-Type' => 'application/pdf',
-                'Content-Disposition' => 'attachment; filename="' . $this->getFileName() . '.pdf"',
-                'Content-Length' => strlen($this->getPdfBinary())
-            ]
+                'Content-Disposition' => 'attachment; filename="'.$this->getFileName().'.pdf"',
+                'Content-Length' => strlen($this->getPdfBinary()),
+            ],
         ];
     }
 
@@ -75,6 +78,6 @@ class InvoicePdfResponse extends HttpResponse
      */
     public function isSuccessful(): bool
     {
-        return $this->status === 'OK' && !empty($this->pdfBase64Encoded);
+        return $this->status === 'OK' && ! empty($this->pdfBase64Encoded);
     }
 }

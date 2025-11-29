@@ -8,18 +8,28 @@ use Illuminate\Http\Client\Response;
 class InvoiceResponse extends HttpResponse
 {
     public ?array $company;
-    public ?array $establishment;
-    public ?array $customer;
-    public ?array $numberingRange;
-    public ?array $billingPeriod;
-    public ?array $bill;
-    public ?array $relatedDocuments;
-    public ?array $items;
-    public ?array $allowanceCharges;
-    public ?array $withholdingTaxes;
-    public ?array $creditNotes;
-    public ?array $debitNotes;
 
+    public ?array $establishment;
+
+    public ?array $customer;
+
+    public ?array $numberingRange;
+
+    public ?array $billingPeriod;
+
+    public ?array $bill;
+
+    public ?array $relatedDocuments;
+
+    public ?array $items;
+
+    public ?array $allowanceCharges;
+
+    public ?array $withholdingTaxes;
+
+    public ?array $creditNotes;
+
+    public ?array $debitNotes;
 
     public function __construct(Response $response)
     {
@@ -75,7 +85,7 @@ class InvoiceResponse extends HttpResponse
 
     public function hasErrors(): bool
     {
-        return !empty($this->bill['errors'] ?? []);
+        return ! empty($this->bill['errors'] ?? []);
     }
 
     public function getErrors(): array

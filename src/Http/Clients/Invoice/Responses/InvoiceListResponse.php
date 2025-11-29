@@ -8,12 +8,19 @@ use Illuminate\Http\Client\Response;
 class InvoiceListResponse extends HttpResponse
 {
     public array $data;
+
     public int $total;
+
     public int $per_page;
+
     public int $current_page;
+
     public int $last_page;
+
     public int $from;
+
     public int $to;
+
     public array $links;
 
     public function __construct(Response $response)
@@ -21,10 +28,10 @@ class InvoiceListResponse extends HttpResponse
         parent::__construct($response);
 
         $responseData = $this->rawData['data'] ?? [];
-        
+
         // Map invoice data
         $this->data = $responseData['data'] ?? [];
-        
+
         // Map pagination data
         $pagination = $responseData['pagination'] ?? [];
         $this->total = $pagination['total'] ?? 0;
@@ -78,6 +85,7 @@ class InvoiceListResponse extends HttpResponse
                 return $link['url'];
             }
         }
+
         return null;
     }
 
@@ -91,6 +99,7 @@ class InvoiceListResponse extends HttpResponse
                 return $link['url'];
             }
         }
+
         return null;
     }
 

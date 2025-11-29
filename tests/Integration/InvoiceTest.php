@@ -4,11 +4,11 @@ use Cotopaco\Factus\DTO\Customer;
 use Cotopaco\Factus\DTO\Invoice;
 use Cotopaco\Factus\DTO\InvoiceItem;
 use Cotopaco\Factus\Factus;
-use Cotopaco\Factus\Http\Clients\Invoice\Responses\InvoiceResponse;
 use Cotopaco\Factus\Http\Clients\Invoice\Responses\InvoiceListResponse;
 use Cotopaco\Factus\Http\Clients\Invoice\Responses\InvoicePdfResponse;
+use Cotopaco\Factus\Http\Clients\Invoice\Responses\InvoiceResponse;
 
-describe("Invoices", function(){
+describe('Invoices', function () {
 
     it('create and validate an invoice', function () {
 
@@ -16,7 +16,7 @@ describe("Invoices", function(){
 
         $customer = new Customer(
             identificationDocumentId: 3,
-            identification: "123456789",
+            identification: '123456789',
             legalOrganizationId: 1,
             tributeId: 18, // 18 aplica iva, 21 no aplica.
             dv: 0,
@@ -45,7 +45,7 @@ describe("Invoices", function(){
         $invoice = new Invoice(
             items: [$item],
             customer: $customer,
-            referenceCode: 'TEST-' . time(),
+            referenceCode: 'TEST-'.time(),
             sendEmail: false
         );
 
@@ -55,7 +55,7 @@ describe("Invoices", function(){
 
     })->group('integration');
 
-    //it('maneja errores de autenticación correctamente', function () {
+    // it('maneja errores de autenticación correctamente', function () {
     //    // Configura credenciales inválidas para probar manejo de errores
     //    Config::set('factus.username', 'invalid-user');
     //    Config::set('factus.password', 'invalid-password');
@@ -64,9 +64,9 @@ describe("Invoices", function(){
     //
     //    // Esto debe lanzar un abort(500)
     //    expect(fn() => $client->getAccessToken())->toThrow(Exception::class);
-    //})->group('integration');
+    // })->group('integration');
 
-    it("can list invoices ", function(){
+    it('can list invoices ', function () {
         $factus = app(Factus::class);
         $response = $factus->invoice()->list();
 
@@ -76,7 +76,7 @@ describe("Invoices", function(){
             ->and($response->statusCode)->toBe(200);
     })->group('invoices.get');
 
-    it("can show a specific invoice by number", function(){
+    it('can show a specific invoice by number', function () {
         $factus = app(Factus::class);
 
         // First, get a list to have a valid invoice number
@@ -105,47 +105,46 @@ describe("Invoices", function(){
         }
     })->group('invoices.show');
 
-    it("can download PDF for a specific invoice", function(){
+    it('can download PDF for a specific invoice', function () {
         $factus = app(Factus::class);
-        
+
         // First, get a list to have a valid invoice number
         $listResponse = $factus->invoice()->list(['page' => 1]);
         expect($listResponse)->toBeInstanceOf(InvoiceListResponse::class);
-        
+
         $invoices = $listResponse->getInvoices();
-        
+
         // Only test if we have invoices
         if (count($invoices) > 0) {
             $invoiceNumber = $invoices[0]['number'];
-            
+
             // Download the PDF
             $pdfResponse = $factus->invoice()->downloadPdf($invoiceNumber);
-            
+
             expect($pdfResponse)->toBeInstanceOf(InvoicePdfResponse::class);
             expect($pdfResponse->status)->toBe('OK');
             expect($pdfResponse->isSuccessful())->toBeTrue();
-            
+
             // Verify PDF data
             expect($pdfResponse->getFileName())->toBeString();
             expect($pdfResponse->getPdfBase64())->toBeString();
             expect(strlen($pdfResponse->getPdfBase64()))->toBeGreaterThan(0);
-            
+
             // Verify binary conversion
             $binaryPdf = $pdfResponse->getPdfBinary();
             expect($binaryPdf)->toBeString();
             expect(strlen($binaryPdf))->toBeGreaterThan(0);
-            
+
             // Check PDF header (should start with %PDF)
             expect(substr($binaryPdf, 0, 4))->toBe('%PDF');
-            
+
             // Test download response structure
             $downloadResponse = $pdfResponse->getPdfDownloadResponse();
             expect($downloadResponse)->toHaveKeys(['content', 'headers']);
             expect($downloadResponse['headers'])->toHaveKeys([
-                'Content-Type', 'Content-Disposition', 'Content-Length'
+                'Content-Type', 'Content-Disposition', 'Content-Length',
             ]);
         }
     })->group('invoices.pdf');
-
 
 })->group('invoices');

@@ -5,23 +5,21 @@ namespace Cotopaco\Factus\DTO;
 class InvoiceItem
 {
     public function __construct(
-        public string  $codeReference,
-        public string  $name,
-        public int     $quantity,
-        public float   $discountRate,
-        public float   $price,
-        public float   $taxRate,
-        public int     $unitMeasureId,
-        public int     $standardCodeId,
-        public int     $isExclude,
-        public int     $tributeId,
-        public ?int    $schemeId = null,
+        public string $codeReference,
+        public string $name,
+        public int $quantity,
+        public float $discountRate,
+        public float $price,
+        public float $taxRate,
+        public int $unitMeasureId,
+        public int $standardCodeId,
+        public int $isExclude,
+        public int $tributeId,
+        public ?int $schemeId = null,
         public ?string $note = null,
-        public ?array  $withholdingTaxes = null,
-        public ?array  $mandate = null,
-    )
-    {
-    }
+        public ?array $withholdingTaxes = null,
+        public ?array $mandate = null,
+    ) {}
 
     public function toArray(): array
     {
@@ -45,8 +43,6 @@ class InvoiceItem
 
     /**
      * Create DTO from array
-     * @param array $data
-     * @return self
      */
     public static function fromArray(array $data): self
     {
@@ -70,11 +66,11 @@ class InvoiceItem
 
     /**
      * Create many DTO from array
-     * @param array $data
+     *
      * @return self[] List of InvoiceItems
      */
     public static function manyFromArray(array $data): array
     {
-        return array_map(fn(array $item) => self::fromArray($item), $data);
+        return array_map(fn (array $item) => self::fromArray($item), $data);
     }
 }

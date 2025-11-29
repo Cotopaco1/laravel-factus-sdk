@@ -6,7 +6,9 @@ namespace Cotopaco\Factus\Http;
 abstract class HttpResponse
 {
     public int $statusCode;
+
     public string $status;
+
     public string $message;
 
     public array $rawData;
@@ -24,6 +26,5 @@ abstract class HttpResponse
     /**
      * Represents of response in array
      * */
-    public function toArray(){}
-
+    public function toArray() {}
 }

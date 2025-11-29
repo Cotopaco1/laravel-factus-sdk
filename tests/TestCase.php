@@ -4,7 +4,6 @@ namespace Cotopaco\Factus\Tests;
 
 use Cotopaco\Factus\FactusServiceProvider;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Facades\Config;
 use Orchestra\Testbench\TestCase as Orchestra;
 
 class TestCase extends Orchestra
@@ -18,19 +17,19 @@ class TestCase extends Orchestra
         );
     }
 
-    protected function getPackageProviders($app) : array
+    protected function getPackageProviders($app): array
     {
         return [
             FactusServiceProvider::class,
         ];
     }
 
-    public function getEnvironmentSetUp($app) : void
+    public function getEnvironmentSetUp($app): void
     {
 
         config()->set('database.default', 'testing');
-        if (file_exists(__DIR__ . '/../.env.testing')) {
-            $dotenv = \Dotenv\Dotenv::createImmutable(__DIR__ . '/..', '.env.testing');
+        if (file_exists(__DIR__.'/../.env.testing')) {
+            $dotenv = \Dotenv\Dotenv::createImmutable(__DIR__.'/..', '.env.testing');
             $dotenv->load();
         }
         // Configura los valores desde el .env.testing
@@ -41,7 +40,6 @@ class TestCase extends Orchestra
         $app['config']->set('factus.client.secret', env('FACTUS_CLIENT_SECRET'));
         $app['config']->set('factus.username', env('FACTUS_USERNAME'));
         $app['config']->set('factus.password', env('FACTUS_PASSWORD'));
-
 
         /*
          foreach (\Illuminate\Support\Facades\File::allFiles(__DIR__ . '/../database/migrations') as $migration) {
