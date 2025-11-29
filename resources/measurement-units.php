@@ -1,0 +1,30 @@
+<?php
+
+return [
+    [
+        'id' => 70,
+        'code' => '94',
+        'name' => 'unidad'
+    ],
+    [
+        "id" => 414,
+        "code" => "KGM",
+        "name" => "kilogramo"
+    ],
+    [
+        "id"=> 449,
+        "code"=> "LBR",
+        "name"=> "libra"
+    ],
+    [
+        "id"=> 512,
+        "code"=> "MTR",
+        "name"=> "metro"
+    ],
+    [
+        "id"=> 874,
+        "code"=> "GLL",
+        "name"=> "galón"
+    ]
+
+];
