@@ -8,7 +8,7 @@
 [![Total Downloads](https://img.shields.io/packagist/dt/cotopaco/laravel-factus-sdk.svg?style=flat-square)](https://packagist.org/packages/cotopaco/laravel-factus-sdk)
 
 [Factus](https://developers.factus.com.co/) es un proveedor tecnologico de Colombia, que provee como servicio una API para interactuar mas facil con la DIAN.
-
+**Este paquete no es oficial de Halltec(Empresa dueña de Factus).**
 Interactua con Factus facilmente con las herramientas disponibles en este paquete !
 
 ejemplo simplicifado:
