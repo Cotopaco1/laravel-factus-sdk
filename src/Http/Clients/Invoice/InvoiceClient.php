@@ -20,8 +20,7 @@ class InvoiceClient extends FactusHttpClient
     {
         return $this->handleError(function () use ($invoice) {
             $response = $this->jsonClient()->post('/bills/validate', $invoice->toArray());
-
-            return new InvoiceResponse($response->json());
+            return new InvoiceResponse($response);
         });
 
     }

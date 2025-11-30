@@ -53,7 +53,7 @@ describe('Invoices', function () {
 
         expect($response)->toBeInstanceOf(InvoiceResponse::class);
 
-    })->group('integration');
+    })->group('integration', 'invoice.store');
 
     // it('maneja errores de autenticación correctamente', function () {
     //    // Configura credenciales inválidas para probar manejo de errores
