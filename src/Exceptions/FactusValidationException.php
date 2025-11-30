@@ -2,34 +2,16 @@
 
 namespace Cotopaco\Factus\Exceptions;
 
-use Illuminate\Http\Client\RequestException;
 use Illuminate\Http\Client\Response;
+use Illuminate\Validation\ValidationException;
 
-class FactusValidationException extends RequestException
+class FactusValidationException extends ValidationException
 {
-    public array $errors = [];
-
-    public function __construct(Response $response)
+    public static function fromResponse(Response $response): self
     {
-        parent::__construct($response);
+        $data   = $response->json('data') ?? [];
+        $errors = $data['errors'] ?? [];
 
-        $data = $response->json('data');
-
-        $this->errors = $data['errors'] ?? [];
-    }
-
-    public function hasError(string $field): bool
-    {
-        return array_key_exists($field, $this->errors);
-    }
-
-    public function getFieldErrors(string $field): array
-    {
-        return $this->errors[$field] ?? [];
-    }
-
-    public function errors(): array
-    {
-        return $this->errors;
+        return static::withMessages($errors);
     }
 }
