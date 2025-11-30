@@ -1,5 +1,7 @@
 <?php
+
 namespace Cotopaco\Factus\Exceptions;
+
 use Illuminate\Http\Client\RequestException;
 use Illuminate\Http\Client\Response;
 
@@ -26,7 +28,7 @@ class FactusValidationException extends RequestException
         return $this->errors[$field] ?? [];
     }
 
-    public function errors() : array
+    public function errors(): array
     {
         return $this->errors;
     }

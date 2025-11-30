@@ -127,8 +127,8 @@ abstract class FactusHttpClient
                 "Request error to Factus API:\n".
                 json_encode($payload, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE)
             );
-            if($exception->response->getStatusCode() == 422){
-                throw new FactusValidationException($exception->response );
+            if ($exception->response->getStatusCode() == 422) {
+                throw new FactusValidationException($exception->response);
             }
             throw $exception;
         } catch (ConnectionException $exception) {
