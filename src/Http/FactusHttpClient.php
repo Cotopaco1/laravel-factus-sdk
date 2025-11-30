@@ -3,6 +3,7 @@
 namespace Cotopaco\Factus\Http;
 
 use Cotopaco\Factus\Constants\CacheConstants;
+use Cotopaco\Factus\Exceptions\FactusValidationException;
 use Illuminate\Http\Client\ConnectionException;
 use Illuminate\Http\Client\PendingRequest;
 use Illuminate\Http\Client\RequestException;
@@ -105,7 +106,10 @@ abstract class FactusHttpClient
 
     /**
      * Maneja los errores al hacer peticion con un http client
-     * */
+     *
+     * @throws FactusValidationException
+     * @throws RequestException|ConnectionException
+     */
     protected function handleError(\Closure $cb): mixed
     {
         try {
@@ -123,7 +127,9 @@ abstract class FactusHttpClient
                 "Request error to Factus API:\n".
                 json_encode($payload, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE)
             );
-
+            if($exception->response->getStatusCode() == 422){
+                throw new FactusValidationException($exception->response );
+            }
             throw $exception;
         } catch (ConnectionException $exception) {
             $payload = [
